@@ -28,7 +28,7 @@ jobs:
         manifest-path: pyproject.toml
 
     - name: Build Docs
-      run: pixi run --environment py313 docs
+      run: pixi run --environment py314 docs
 
     - name: Deploy
       if: success() && github.event_name == 'release'
