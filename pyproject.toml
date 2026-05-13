@@ -83,7 +83,7 @@ platforms = ["win-64", "linux-64", "osx-64"]
 
 [tool.pixi.environments]
 default = { features = ["py314"], solve-group = "py314" }
-py313 = { features = ["py314"], solve-group = "py314" }
+py314 = { features = ["py314"], solve-group = "py314" }
 py310 = ["py310"]
 
 [tool.pixi.tasks]
