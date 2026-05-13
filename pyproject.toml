@@ -87,14 +87,11 @@ py314 = { features = ["py314"], solve-group = "py314" }
 py310 = ["py310"]
 
 [tool.pixi.tasks]
-test = "pip install -e . --no-deps --force-reinstall && pytest -rxs tests"
-docs = """\
-pip install -e . --no-deps --force-reinstall
-&& jupyter nbconvert --to notebook --execute notebooks/gridgeo_tour.ipynb --output=gridgeo_tour-output.ipynb
-&& mv notebooks/*output.ipynb docs/source/
-&& cd docs
-&& make clean html linkcheck
-"""
+install = { cmd = "pip install -e . --no-deps --force-reinstall" }
+test = { cmd = "pytest -rxs tests", depends-on = ["install"] }
+make_notebooks = { cmd = "jupyter nbconvert --to notebook --execute notebooks/gridgeo_tour.ipynb --output=gridgeo_tour-output.ipynb && mv notebooks/*output.ipynb docs/source/", depends-on = ["install"] }
+docs = { cmd = "cd docs && make clean html linkcheck", depends-on = ["make_notebooks"] }
+
 
 [tool.pixi.feature.py314.dependencies]
 python = "3.14.*"
